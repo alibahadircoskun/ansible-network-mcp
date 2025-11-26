@@ -6,12 +6,6 @@ A Model Context Protocol (MCP) server that enables Claude Desktop to manage Ansi
 
 The Ansible Network MCP Server bridges conversational AI and network infrastructure management. It allows network engineers to describe automation goals in natural language and have Claude execute them through Ansible.
 
-**Supported Vendors:**
-- Juniper Networks (JunOS)
-- Cisco (IOS, IOS-XE, NX-OS)
-- Arista (EOS)
-- Other vendors with Ansible collections
-
 ## Features
 
 **Directory and File Management**

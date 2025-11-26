@@ -1,0 +1,13 @@
+# Ansible Network MCP Server Dependencies
+# Install with: pip install -r requirements.txt
+
+# MCP Framework
+mcp>=1.0.0
+
+# Required for FastMCP
+fastmcp>=0.1.0
+
+# Ansible (core)
+ansible-core>=2.15.0
+
+# Juniper Networks Ansible Collection will be installed separately via ansible-galaxy

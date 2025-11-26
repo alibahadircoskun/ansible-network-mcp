@@ -1,0 +1,35 @@
+---
+# Example Group Variables for Cisco Devices
+# Copy to ~/ansible/group_vars/cisco_switches.yml and customize
+
+# Connection Settings
+ansible_network_os: cisco.ios.ios
+ansible_connection: network_cli
+
+# Authentication
+# IMPORTANT: Use Ansible Vault for production credentials
+ansible_user: admin
+ansible_password: changeme
+
+# Privilege Escalation
+ansible_become: yes
+ansible_become_method: enable
+ansible_become_password: changeme
+
+# SSH Settings
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+
+# Timeouts
+ansible_command_timeout: 60
+ansible_connect_timeout: 30
+
+# Common Device Settings
+ntp_servers:
+  - 10.0.0.1
+  - 10.0.0.2
+
+dns_servers:
+  - 8.8.8.8
+  - 8.8.4.4
+
+syslog_server: 10.0.0.100

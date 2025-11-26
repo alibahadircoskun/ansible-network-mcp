@@ -1,0 +1,31 @@
+---
+# Example Group Variables for Juniper Devices
+# Copy to ~/ansible/group_vars/juniper_routers.yml and customize
+
+# Connection Settings
+ansible_network_os: junipernetworks.junos.junos
+ansible_connection: netconf
+ansible_port: 830
+
+# Authentication
+# IMPORTANT: Use Ansible Vault for production credentials
+ansible_user: admin
+ansible_password: changeme
+
+# SSH Settings
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+
+# Timeouts
+ansible_command_timeout: 60
+ansible_connect_timeout: 30
+
+# Common Device Settings
+ntp_servers:
+  - 10.0.0.1
+  - 10.0.0.2
+
+dns_servers:
+  - 8.8.8.8
+  - 8.8.4.4
+
+syslog_server: 10.0.0.100

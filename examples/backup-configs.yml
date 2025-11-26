@@ -1,0 +1,48 @@
+---
+# Example Playbook: Backup Device Configurations
+# This playbook retrieves and saves the running configuration from all devices
+
+- name: Backup Network Device Configurations
+  hosts: all
+  gather_facts: no
+  
+  vars:
+    backup_dir: /tmp/backups
+    timestamp: "{{ ansible_date_time.iso8601_basic_short }}"
+  
+  tasks:
+    - name: Create backup directory
+      delegate_to: localhost
+      file:
+        path: "{{ backup_dir }}"
+        state: directory
+        mode: '0755'
+      run_once: true
+    
+    - name: Backup Juniper configuration
+      junipernetworks.junos.junos_config:
+        backup: yes
+        backup_options:
+          filename: "{{ inventory_hostname }}_{{ timestamp }}.conf"
+          dir_path: "{{ backup_dir }}"
+      when: ansible_network_os == 'junipernetworks.junos.junos'
+    
+    - name: Backup Cisco configuration
+      cisco.ios.ios_config:
+        backup: yes
+        backup_options:
+          filename: "{{ inventory_hostname }}_{{ timestamp }}.conf"
+          dir_path: "{{ backup_dir }}"
+      when: ansible_network_os == 'cisco.ios.ios'
+    
+    - name: Backup Arista configuration
+      arista.eos.eos_config:
+        backup: yes
+        backup_options:
+          filename: "{{ inventory_hostname }}_{{ timestamp }}.conf"
+          dir_path: "{{ backup_dir }}"
+      when: ansible_network_os == 'arista.eos.eos'
+    
+    - name: Display backup location
+      debug:
+        msg: "Configuration backed up to {{ backup_dir }}/{{ inventory_hostname }}_{{ timestamp }}.conf"
